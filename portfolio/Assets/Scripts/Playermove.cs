@@ -13,12 +13,15 @@ public class Playermove : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(v + h);
+        Debug.Log(MoveVector3);
 
-        v = Input.GetAxis("Vertical");
-        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxisRaw("Vertical");
+        h = Input.GetAxisRaw("Horizontal");
         MoveVector3 = new Vector3(h,0,v);
+        MoveVector3.Normalize();
+    }
+    private void FixedUpdate()
+    {
         transform.Translate(MoveVector3 * MoveSpeed * Time.fixedDeltaTime);
     }
-
 }
